@@ -33,6 +33,7 @@ body.landing {
 }
 
 .point {
+    display: table-cell;
     position: relative;
     padding: 2rem;
     text-align: center;
