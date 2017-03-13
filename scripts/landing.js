@@ -5,14 +5,9 @@ var revealPoint = function(point) {
         point.style.transform = "scaleX(1) translateY(0)";
         point.style.msTransform = "scaleX(1) translateY(0)";
         point.style.WebkitTransform = "scaleX(1) translateY(0)";
-    }
+};
 
-var animatePoints = function() {
-    forEach(points, revealPoint);
-    
-    for (var i = 0; i < points.length; i++) {
-        revealPoint(i);
-    }
+var animatePoints = function(points) {
 };
 
 window.onload = function() {
