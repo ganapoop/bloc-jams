@@ -8,7 +8,9 @@ var revealPoint = function(point) {
 };
 
 var animatePoints = function(points) {
+    forEach(pointsArray, revealPoint);    
 };
+
 
 window.onload = function() {
     if (window.innerHeight > 950) {
