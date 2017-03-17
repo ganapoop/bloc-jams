@@ -39,7 +39,28 @@ var createSongRow = function(songNumber, songName, songLength) {
     + '   <td class="song-item-duration>' + songLength + '</td>'
     + '</tr>';
 
-    return $(template);
+    var $row = $(template);
+     var onHover = function(event) {
+        var songNumberCell = $(this).find('.song-item-number');
+        var songNumber = songNumberCell.attr('.data-song-number');
+         
+        if (songNumber !== currentlyPlayingSong) {
+            songNumberCell.html(playButtonTemplate);
+        }
+    };
+    
+    var hoverOff = function(event) {
+        var songNumberCell = $(this).find('.song-item-number');
+        var songNumber = songNumberCell.attr('.data-song-number');
+        
+        if (songNumber !== currentlyPlayingSong) {
+            songNumberCell.html(songNumber);
+        }
+    };
+    
+    $row.find('.song-item-number').click(clickHandler);
+    $row.hover(onHover, offHover);
+    return $row;
 };
 
 var setCurrentAlbum = function(album) {
@@ -51,8 +72,8 @@ var setCurrentAlbum = function(album) {
     var $albumSongList = $('.album-view-song-list');
     // #2
     $albumTitle.text(album.title);
-    $albumArtist.text.(album.artist);
-    $albumReleaseInfo.text.(album.year + ' ' + album.label);
+    $albumArtist.text(album.artist);
+    $albumReleaseInfo.text(album.year + ' ' + album.label);
     $albumImage.attr('src', album.albumArtUrl);
     // #3
     $albumSongList.empty();
@@ -66,15 +87,19 @@ var setCurrentAlbum = function(album) {
 var findParentByClassName = function(element, targetClass){
     if (element) {
         var currentParent = element.parentElement;
-    if (element.parentElement == undefined && element.parentElement == null){
-        console.log("No Parent found");
-    }
+        
+        if (currentParent === null){
+            console.log("No Parent found");
+        }
+        
         while(currentParent.className !== targetClass && currentParent.className !== null) {
             currentParent = currentParent.className;
         }
-    if (currentParent.className == undefined && currentParent.className == null) {
+        
+        if (currentParent.className === null) {
             console.log("No Parent found with that class name");
         }
+        
         return currentParent;
     } 
 }
