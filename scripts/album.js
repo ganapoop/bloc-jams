@@ -260,12 +260,26 @@ var setTotalTimeInPlayerBar = function(totalTime) {
 
 var filterTimeCode = function (timeInSeconds) {
     var time = parseFloat(timeInSeconds);
-    
+
     var min = Math.floor(time / 60);
     var seconds = Math.floor(time % 60);
-    
+
     return min + ":" + seconds;
 };
+
+var togglePlayFromPlayerBar = function() {
+    if(currentSoundFile.isPaused()) {
+        var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);        currentlyPlayingCell.html(pauseButtonTemplate);
+        $('.main-controls .play-pause').html(playerBarPauseButton)
+        currentSoundFile.play();
+    } else {
+        var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
+        currentlyPlayingCell.html(playButtonTemplate);
+        $('.main-controls .play-pause').html(playerBarPlayButton)
+        currentSoundFile.pause();
+    }
+};
+
 
 var updatePlayerBarSong = function() {
     $('.currently-playing .song name').text(currentSongFromAlbum.title);
@@ -290,6 +304,7 @@ var currentVolume = 80;
 
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
+var $playPauseButton = $('.main-controls .play-pause');
 
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
